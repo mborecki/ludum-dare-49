@@ -42,6 +42,13 @@ const spritesheets = [
         sprites: [
             {name: 'background', path: './sprites/map/background.jpg'}
         ]
+    },
+    {
+        outputPath: './assets/generated/',
+        filename: 'blocks',
+        sprites: [
+            {name: 'tree-1', path: './sprites/blocks/tree-1.png'}
+        ]
     }
 ];
 

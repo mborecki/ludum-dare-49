@@ -1,13 +1,25 @@
 import { GameState } from "../../types";
 import ProgramStep from "./step";
 
+const TEXT_COLOR = 0x8fd96c;
+
 export default class GameProgram extends Phaser.GameObjects.Container {
 
+    private header: Phaser.GameObjects.Text;
     private pointer: Phaser.GameObjects.Graphics;
     private steps: ProgramStep[] = [];
 
     constructor(scene: Phaser.Scene) {
         super(scene,0,0);
+
+        this.header = new Phaser.GameObjects.Text(this.scene, 131, 0, 'Program', {
+            color: '#8fd96c',
+            fontSize: '24px'
+        });
+        this.header.setTint(0x00ff00);
+        this.header.setOrigin(.5, 0);
+
+        this.add(this.header);
 
         this.pointer = new Phaser.GameObjects.Graphics(scene);
 
@@ -37,12 +49,8 @@ export default class GameProgram extends Phaser.GameObjects.Container {
     public deleteStep(index: number) {
         const step = this.steps[index];
 
-        console.log('#1', this.steps.length);
-
         this.steps.splice(index, 1);
         step.destroy();
-
-        console.log('#2', this.steps.length);
         this.steps.forEach((s, index) => {
             s.setPosition(20, index * 40);
         });

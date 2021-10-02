@@ -61,10 +61,7 @@ function validateIntersections(intersections: Intersection[]) {
         });
     }
 
-    console.log({ outside, inside });
-
     if (inside.size !== intersections.length) {
-        console.log('FIX MAP!', inside.size, intersections.length);
 
         if (outside.size > inside.size) {
             validateIntersections(fix(inside, outside));
@@ -84,8 +81,6 @@ function fix(g1: Set<Intersection>, g2: Set<Intersection>): Intersection[] {
 
     g1.forEach(int => {
         const siblings = getSiblings(int.x, int.y, intersections);
-
-        console.log({ siblings });
 
         const outsideSibling = siblings.find(s => g2.has(s));
 

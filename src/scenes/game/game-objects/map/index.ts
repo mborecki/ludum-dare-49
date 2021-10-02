@@ -1,6 +1,7 @@
 import GAME_CONFIG from "../../config";
 import { DIRECTION, GameState } from "../../types";
 import { getSibling } from "../../utils/generate-intersections";
+import MapBlocks from "./blocks";
 import MapDebug from "./debug";
 import PlayerGO from "./player";
 import Roads from "./roads";
@@ -9,6 +10,8 @@ export default class GameMap extends Phaser.GameObjects.Container {
 
     private player: PlayerGO;
     private gameState?: GameState;
+
+    private blocks: MapBlocks;
 
     private roads: Roads;
 
@@ -23,6 +26,9 @@ export default class GameMap extends Phaser.GameObjects.Container {
         this.roads.setPosition(0,0);
         this.add(this.roads);
 
+        this.blocks = new MapBlocks(scene);
+        this.add(this.blocks);
+
         this.player = new PlayerGO(scene);
         this.add(this.player);
     }
@@ -35,6 +41,8 @@ export default class GameMap extends Phaser.GameObjects.Container {
         // this.add(mapDebug);
 
         this.roads.createRoads(gameState.intersections);
+
+        this.blocks.createBlocks(gameState.intersections, GAME_CONFIG.MAP_WIDTH, GAME_CONFIG.MAP_HEIGHT);
 
         this.player.setPosition(gameState.player.x * GAME_CONFIG.INTERSECTION_DISTANCE, gameState.player.y * GAME_CONFIG.INTERSECTION_DISTANCE);
     }

@@ -12,6 +12,6 @@ export default class PlayerGO extends Phaser.GameObjects.Container {
         debug.fillCircle(0, 0, 15);
     }
     movePlayerTo(x: number, y: number) {
-        this.setPosition(x * GAME_CONFIG.INTERSECTION_DISTANCE, y * GAME_CONFIG.INTERSECTION_DISTANCE);
+        this.setPosition(50 + x * GAME_CONFIG.INTERSECTION_DISTANCE, 50 + y * GAME_CONFIG.INTERSECTION_DISTANCE);
     }
 }

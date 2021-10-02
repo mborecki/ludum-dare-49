@@ -3,6 +3,7 @@ import GameMap from "./game-objects/map";
 import PlayerGO from "./game-objects/map/player";
 import GameMoney from "./game-objects/money";
 import GameProgram from "./game-objects/program";
+import SidePanel from "./game-objects/side-panel";
 import RULES from "./rules";
 import { Procedure, PROCEDURE_TYPE } from "./types";
 import generateGameState from "./utils/generate-game-state";
@@ -23,6 +24,10 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
+        const panel = new SidePanel(this);
+        panel.setPosition(1018, 0);
+        this.add.existing(panel);
+
         this.map = new GameMap(this);
         this.map.loadGameState(this.gameState);
 
@@ -33,9 +38,9 @@ export default class GameScene extends Phaser.Scene {
         this.program = new GameProgram(this);
         this.program.loadGameState(this.gameState);
 
-        this.program.setPosition(1000, 20);
+        this.program.setPosition(10, 10);
 
-        this.add.existing(this.program);
+        panel.add(this.program);
 
         this.money = new GameMoney(this);
 
@@ -53,7 +58,6 @@ export default class GameScene extends Phaser.Scene {
     }
 
     private executeStep(procedure: Procedure) {
-        console.log(procedure);
         switch (procedure.type) {
             case PROCEDURE_TYPE.DIRECTION:
                 if (this.map.movePlayer(procedure.direction)) {
@@ -87,7 +91,6 @@ export default class GameScene extends Phaser.Scene {
         const index = this.gameState.program.activeStep;
         this.program.deleteStep(index);
         const deleted = this.gameState.program.procedures.splice(index, 1);
-        console.log(deleted);
 
         this.changeMoney(RULES.ERROR_COST)
 
