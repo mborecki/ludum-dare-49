@@ -23,6 +23,24 @@ const spritesheets = [
             {name: 'icon-triangle', path: './sprites/icon-triangle.png'},
             {name: 'icon-star', path: './sprites/icon-star.png'}
         ]
+    },
+    {
+        outputPath: './assets/generated/',
+        filename: 'roads',
+        sprites: [
+            {name: 'corner', path: './sprites/roads/corner.png'},
+            {name: 'cross-t', path: './sprites/roads/cross-t.png'},
+            {name: 'cross-x', path: './sprites/roads/cross-x.png'},
+            {name: 'dead-end', path: './sprites/roads/dead-end.png'},
+            {name: 'road', path: './sprites/roads/road.png'}
+        ]
+    },
+    {
+        outputPath: './assets/generated/',
+        filename: 'map',
+        sprites: [
+            {name: 'background', path: './sprites/map/background.jpg'}
+        ]
     }
 ];
 
