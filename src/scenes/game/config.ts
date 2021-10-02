@@ -1,0 +1,7 @@
+const GAME_CONFIG = {
+    INTERSECTION_DISTANCE: 100,
+    MAP_WIDTH: 10,
+    MAP_HEIGHT: 10
+}
+
+export default GAME_CONFIG;

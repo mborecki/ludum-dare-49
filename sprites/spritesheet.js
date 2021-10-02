@@ -12,6 +12,17 @@ const spritesheets = [
             { name: 'test', path: './sprites/test.jpg' },
             { name: 'dot', path: './sprites/dot.jpg' },
         ]
+    },
+    {
+        outputPath: './assets/generated/',
+        filename: 'tiles',
+        sprites: [
+            {name: 'base-tile', path: './sprites/base-tile.png'},
+            {name: 'icon-circle', path: './sprites/icon-circle.png'},
+            {name: 'icon-squre', path: './sprites/icon-squre.png'},
+            {name: 'icon-triangle', path: './sprites/icon-triangle.png'},
+            {name: 'icon-star', path: './sprites/icon-star.png'}
+        ]
     }
 ];
 
