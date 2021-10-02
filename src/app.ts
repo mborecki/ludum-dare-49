@@ -9,6 +9,7 @@ export default class App extends Phaser.Game {
             type: Phaser.AUTO,
             width: 1280,
             height: 720,
+            pixelArt: true,
             physics: {
                 default: 'arcade',
                 arcade: {

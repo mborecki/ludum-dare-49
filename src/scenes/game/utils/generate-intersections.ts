@@ -174,7 +174,7 @@ function getSiblingDirection(x: number, y: number, sibling: Intersection): DIREC
     throw 'ERROR: getSiblingDirection';
 }
 
-function reverseDirection(dir: DIRECTION): DIRECTION {
+export function reverseDirection(dir: DIRECTION): DIRECTION {
     switch (dir) {
         case DIRECTION.N: return DIRECTION.S;
         case DIRECTION.S: return DIRECTION.N;

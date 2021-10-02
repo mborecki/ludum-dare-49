@@ -26,14 +26,14 @@ export default class GameScene extends Phaser.Scene {
         this.map = new GameMap(this);
         this.map.loadGameState(this.gameState);
 
-        this.map.setPosition(50, 50);
+        this.map.setPosition(0, 0);
 
         this.add.existing(this.map);
 
         this.program = new GameProgram(this);
         this.program.loadGameState(this.gameState);
 
-        this.program.setPosition(1000,20);
+        this.program.setPosition(1000, 20);
 
         this.add.existing(this.program);
 

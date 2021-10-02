@@ -32,7 +32,8 @@ const spritesheets = [
             {name: 'cross-t', path: './sprites/roads/cross-t.png'},
             {name: 'cross-x', path: './sprites/roads/cross-x.png'},
             {name: 'dead-end', path: './sprites/roads/dead-end.png'},
-            {name: 'road', path: './sprites/roads/road.png'}
+            {name: 'road-1', path: './sprites/roads/road-1.png'},
+            {name: 'road-2', path: './sprites/roads/road-2.png'}
         ]
     },
     {
