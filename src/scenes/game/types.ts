@@ -57,14 +57,21 @@ export type Program = {
 }
 
 export enum PROCEDURE_TYPE {
-    DIRECTION = 'direction'
+    DIRECTION = 'direction',
+    RESTART_PROGRAM = 'restart'
 }
 
-export interface Procedure{
+export type Procedure = DirectionProcedure | RestartProcedure;
+
+export interface BaseProcedure{
     type: PROCEDURE_TYPE
 }
 
-export interface DirectionProcedure extends Procedure {
+export interface DirectionProcedure extends BaseProcedure {
     type: PROCEDURE_TYPE.DIRECTION,
     direction: DIRECTION
+}
+
+export interface RestartProcedure extends BaseProcedure {
+    type: PROCEDURE_TYPE.RESTART_PROGRAM
 }

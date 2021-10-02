@@ -100,7 +100,7 @@ function fix(g1: Set<Intersection>, g2: Set<Intersection>): Intersection[] {
     return intersections;
 }
 
-function getSibling(x: number, y: number, direction: DIRECTION, intersections: Intersection[]) {
+export function getSibling(x: number, y: number, direction: DIRECTION, intersections: Intersection[]) {
     switch (direction) {
         case DIRECTION.W:
             return intersections.find(int => (int.x === x - 1 && int.y === y));

@@ -1,21 +1,95 @@
 import getAudioPlayer from "../audio";
 import GameMap from "./game-objects/map";
-import PlayerGO from "./game-objects/player";
+import PlayerGO from "./game-objects/map/player";
+import GameMoney from "./game-objects/money";
+import GameProgram from "./game-objects/program";
+import RULES from "./rules";
+import { Procedure, PROCEDURE_TYPE } from "./types";
+import generateGameState from "./utils/generate-game-state";
 
 export default class GameScene extends Phaser.Scene {
 
     private audio = getAudioPlayer();
+
+    private gameState = generateGameState();
+
+    private map: GameMap;
+    private program: GameProgram;
+
+    private money: GameMoney;
 
     constructor() {
         super(null);
     }
 
     create() {
-        const map = new GameMap(this);
+        this.map = new GameMap(this);
+        this.map.loadGameState(this.gameState);
 
-        map.setPosition(50,50);
+        this.map.setPosition(50, 50);
 
-        this.add.existing(map);
-        this.add.existing(new PlayerGO(this));
+        this.add.existing(this.map);
+
+        this.program = new GameProgram(this);
+        this.program.loadGameState(this.gameState);
+
+        this.program.setPosition(1000,20);
+
+        this.add.existing(this.program);
+
+        this.money = new GameMoney(this);
+
+        this.money.setPosition(1000, 600);
+        this.add.existing(this.money);
+        this.money.setValue(this.gameState.money);
+
+        window['nextStep'] = () => {
+            this.nextStep();
+        }
+    }
+
+    private nextStep() {
+        this.executeStep(this.gameState.program.procedures[this.gameState.program.activeStep]);
+    }
+
+    private executeStep(procedure: Procedure) {
+        console.log(procedure);
+        switch (procedure.type) {
+            case PROCEDURE_TYPE.DIRECTION:
+                if (this.map.movePlayer(procedure.direction)) {
+                    this.setActiveStep(this.gameState.program.activeStep + 1);
+                } else {
+                    this.procedureError();
+                }
+                break;
+
+            case PROCEDURE_TYPE.RESTART_PROGRAM:
+                this.setActiveStep(0);
+                break;
+        }
+    }
+
+    private setActiveStep(index: number) {
+        this.gameState.program.activeStep = index;
+        this.program.setPointer(index);
+    }
+
+    private changeMoney(diff: number) {
+        this.gameState.money += diff;
+        this.money.setValue(this.gameState.money);
+
+        if (this.gameState.money < 0) {
+            throw "BANKRUT!!!!";
+        }
+    }
+
+    private procedureError() {
+        const index = this.gameState.program.activeStep;
+        this.program.deleteStep(index);
+        const deleted = this.gameState.program.procedures.splice(index, 1);
+        console.log(deleted);
+
+        this.changeMoney(RULES.ERROR_COST)
+
     }
 }
