@@ -1,0 +1,4 @@
+build/
+dist/
+assets/generated
+node_modules/
