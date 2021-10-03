@@ -51,14 +51,20 @@ class InstallButtom extends Phaser.GameObjects.Container {
         this.add(bg);
 
         this.setInteractive({
-            hitArea: new Phaser.Geom.Rectangle(0, 0, 166, 50),
+            hitArea: new Phaser.Geom.Rectangle(0, 0, 116, 50),
             hitAreaCallback: Phaser.Geom.Rectangle.Contains,
             useHandCursor: true
         });
 
         const frame = new Phaser.GameObjects.Sprite(scene, 58, 25, 'panel', 'frame-small');
 
-        const sprite = new Phaser.GameObjects.Sprite(scene, 58, 25, 'panel', '');
+        const sprite = new Phaser.GameObjects.Sprite(scene, 39, 25, 'panel', '');
+
+        const text = new Phaser.GameObjects.Text(this.scene, 78, 25, '$3', {
+            color: 'red',
+            fontSize: '20px'
+        })
+        text.setOrigin(.5);
 
         switch (dir) {
             case DIRECTION.N:
@@ -77,6 +83,7 @@ class InstallButtom extends Phaser.GameObjects.Container {
 
         this.add(frame);
         this.add(sprite);
+        this.add(text);
 
         this.on('pointerover', () => {
             frame.setTint(0xff0000);

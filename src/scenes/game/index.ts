@@ -88,7 +88,7 @@ export default class GameScene extends Phaser.Scene {
         panel.add(this.carPanel);
 
         this.gameOver = new GameOver(this);
-        // this.gameOver.setVisible(false);
+        this.gameOver.setVisible(false);
         this.add.existing(this.gameOver);
 
         this.updateGameState();
