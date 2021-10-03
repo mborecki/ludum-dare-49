@@ -115,6 +115,8 @@ export default class GameScene extends Phaser.Scene {
         this.program.deleteStep(index);
         const deleted = this.gameState.program.procedures.splice(index, 1);
 
+        this.cameras.main.flash(300, 255,0,0);
+
         this.changeMoney(RULES.ERROR_COST)
 
     }

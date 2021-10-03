@@ -57,4 +57,9 @@ export default class ProgramStep extends Phaser.GameObjects.Container {
     public markActive(value: boolean) {
         this.playSprite.setTexture('panel', value ? 'play-active' : 'play');
     }
+
+    destMe() {
+        this.icon.setTint(0xff0000);
+        this.playSprite.setTint(0xff0000);
+    }
 }

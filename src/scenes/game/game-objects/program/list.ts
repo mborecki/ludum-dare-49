@@ -177,10 +177,28 @@ export default class ProgramList extends Phaser.GameObjects.Container {
         const step = this.steps[value];
 
         this.steps.splice(value, 1);
-        step.destroy();
-        this.steps.forEach((s, index) => {
-            s.setPosition(0, index * 51);
+
+        this.scene.add.tween({
+            targets: step,
+            delay: 300,
+            duration: 300,
+            x: 300
         });
+        step.destMe();
+
+        setTimeout(() => {
+            step.destroy();
+        }, 1000);
+
+        this.steps.forEach((step, index) => {
+            this.scene.add.tween({
+                targets: step,
+                duration: 300,
+                delay: 600,
+                y: index*51,
+                x: 0,
+            })
+        })
         this.setPointer();
     }
     public addStep(step: Procedure, index: number) {
