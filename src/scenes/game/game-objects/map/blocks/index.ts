@@ -89,7 +89,7 @@ export default class MapBlocks extends Phaser.GameObjects.Container {
             })
         });
 
-        // [zones[13]].forEach(zone => {
+        // [zones[0]].forEach(zone => {
         zones.forEach(zone => {
             const { tiles, minX, minY, maxX, maxY } = zone.map(index => {
                 return {
@@ -121,32 +121,60 @@ export default class MapBlocks extends Phaser.GameObjects.Container {
                 normGrid[(y - minY) * normGridWidth + (x - minX)] = false;
             });
 
-            const texture = new Phaser.GameObjects.RenderTexture(this.scene, 0, 0, normGridWidth * GRID_SIZE, normGridHeight * GRID_SIZE);
+            const texture = new Phaser.GameObjects.RenderTexture(
+                this.scene, 0, 0,
+                normGridWidth * GRID_SIZE,
+                normGridHeight * GRID_SIZE
+            );
+
+            console.log('GRID', normGridWidth, normGridHeight)
 
             normGrid.forEach((value, index) => {
                 if (!value) {
+
+
+                    const x = index % normGridWidth;
+                    const y = Math.floor(index / normGridWidth);
 
                     let fitted = false;
                     do {
                         fitted = true;
                         const element = getRandomElement();
 
-                        for (let i = 0; i < element.width; i++) {
-                            for (let j = 0; j < element.height; j++) {
-                                if (fitted && normGrid[index + i + j * normGridWidth]) {
-                                    fitted = false;
-                                }
+                        if (x + element.width > normGridWidth || y + element.height > normGridHeight) {
+                            fitted = false;
+                        } else {
+
+                            if (element.frame === 'building-1') {
+                                console.log('building-1', (index % normGridWidth), Math.floor(index / normGridWidth))
+                                console.log('#1', element),
+                                    console.log('#2', { x, y })
+                                console.log('#2', x + element.width, y + element.height)
                             }
                         }
 
                         if (fitted) {
                             for (let i = 0; i < element.width; i++) {
                                 for (let j = 0; j < element.height; j++) {
+                                    if (fitted && normGrid[index + i + j * normGridWidth]) {
+                                        // console.log('NOT FITTED!',element, index + i + j * normGridWidth);
+                                        fitted = false;
+                                    }
+                                }
+                            }
+                        }
+
+
+                        if (fitted) {
+
+                            for (let i = 0; i < element.width; i++) {
+                                for (let j = 0; j < element.height; j++) {
+                                    console.log(i, j, normGrid[index + i + j * normGridWidth]);
                                     normGrid[index + i + j * normGridWidth] = true;
                                 }
                             }
 
-                            texture.drawFrame('blocks', 'tree-1', (index % normGridWidth) * GRID_SIZE, Math.floor(index / normGridWidth) * GRID_SIZE);
+                            texture.drawFrame('blocks', element.frame, (index % normGridWidth) * GRID_SIZE, Math.floor(index / normGridWidth) * GRID_SIZE);
                         }
 
                     } while (!fitted);
@@ -154,7 +182,7 @@ export default class MapBlocks extends Phaser.GameObjects.Container {
             });
 
             texture.setOrigin(0);
-            texture.setPosition(50 + minX * GRID_SIZE - GRID_SIZE/2, 50 + minY * GRID_SIZE - GRID_SIZE/2);
+            texture.setPosition(50 + minX * GRID_SIZE - GRID_SIZE / 2, 50 + minY * GRID_SIZE - GRID_SIZE / 2);
             // texture.setTint(Math.random() * 255 * 255 * 255)
 
             this.add(texture);

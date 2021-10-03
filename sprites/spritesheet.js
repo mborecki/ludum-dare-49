@@ -59,7 +59,17 @@ const spritesheets = [
         outputPath: './assets/generated/',
         filename: 'blocks',
         sprites: [
-            { name: 'tree-1', path: './sprites/blocks/tree-1.png' }
+            { name: 'tree-1', path: './sprites/blocks/tree-1.png' },
+            { name: 'tree-2', path: './sprites/blocks/tree-2.png' },
+            { name: 'building-1', path: './sprites/blocks/building-1.png' },
+            { name: 'building-2', path: './sprites/blocks/building-2.png' },
+            { name: 'building-2b', path: './sprites/blocks/building-2b.png' },
+            { name: 'building-2c', path: './sprites/blocks/building-2c.png' },
+            { name: 'building-3', path: './sprites/blocks/building-3.png' },
+            { name: 'building-4', path: './sprites/blocks/building-4.png' },
+            { name: 'building-5', path: './sprites/blocks/building-5.png' },
+            { name: 'building-6', path: './sprites/blocks/building-6.png' },
+            { name: 'building-7', path: './sprites/blocks/building-7.png' }
         ]
     },
     {

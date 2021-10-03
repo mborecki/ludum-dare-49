@@ -54,8 +54,8 @@ export default class GameScene extends Phaser.Scene {
 
         this.program.on('buy', (dir: DIRECTION) => {
             if (this.gameState.money >= RULES.ADD_COST) {
-                this.gameState.money -= RULES.ADD_COST;
-                this.money.setValue(this.gameState.money);
+
+                this.changeMoney(-RULES.ADD_COST);
 
                 const newStep = {
                     type: PROCEDURE_TYPE.DIRECTION,
@@ -71,7 +71,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.money = new GameMoney(this);
 
-        this.money.setPosition(1000, 600);
+        this.money.setPosition(796, 670);
         this.add.existing(this.money);
         this.money.setValue(this.gameState.money);
 
@@ -117,6 +117,8 @@ export default class GameScene extends Phaser.Scene {
     private changeMoney(diff: number) {
         this.gameState.money += diff;
         this.money.setValue(this.gameState.money);
+
+        this.money.spawnInfo(diff);
 
         if (this.gameState.money < 0) {
             throw "BANKRUT!!!!";
