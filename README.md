@@ -3,7 +3,7 @@
 Game for Ludum dare 49.
 https://ldjam.com/events/ludum-dare/49/our-autopilot-is-somewhat-unstable
 
-
+PLAY HERE: https://mborecki.pl/ld49/
 
 
 
