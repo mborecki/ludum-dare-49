@@ -34,7 +34,7 @@ export default class GameOver extends Phaser.GameObjects.Container {
                 console.log('xxxxxx');
                 this.on('pointerdown', () => {
                     console.log('cccc');
-                    this.scene.scene.start('mainScene')
+                    this.scene.scene.start('mainScene');
                 });
             }, 2000);
         }

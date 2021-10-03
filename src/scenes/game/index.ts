@@ -37,6 +37,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
+        this.gameState = generateGameState();
         const panel = new SidePanel(this);
         panel.setPosition(1018, 0);
         this.add.existing(panel);
@@ -84,7 +85,6 @@ export default class GameScene extends Phaser.Scene {
 
         this.points.setPosition(0, 670);
         this.add.existing(this.points);
-        this.money.setValue(0);
 
         this.carPanel = new CarPanel(this);
         this.carPanel.setPosition(10, 560);
