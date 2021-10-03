@@ -1,8 +1,16 @@
 # Our autopilot is somewhat unstable...
 
 Game for Ludum dare 49.
+https://ldjam.com/events/ludum-dare/49/our-autopilot-is-somewhat-unstable
+
+
+
+
 
 ------------------------------------------------------------------------------------------
+
+
+
 
 
 # Framework
