@@ -42,6 +42,8 @@ const spritesheets = [
         sprites: [
             { name: 'background', path: './sprites/map/background.jpg' },
             { name: 'player', path: './sprites/map/player.png' },
+            { name: 'player-bubble', path: './sprites/map/player-bubble.png' },
+            { name: 'player-target', path: './sprites/map/player-target.png' },
             { name: 'target-red', path: './sprites/map/target-red.png' },
             { name: 'client-red', path: './sprites/map/client-red.png' },
         ]

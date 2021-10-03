@@ -11,22 +11,23 @@ export default class PlayerGO extends Phaser.GameObjects.Container {
         debug.fillStyle(0xffffff, 1);
         debug.fillCircle(0, 0, 15);
 
-        const sprite = new Phaser.GameObjects.Sprite(scene, 0, 5, 'player', 'player0');
-        sprite.setOrigin(.5, 1);
+        const target = new Phaser.GameObjects.Sprite(scene, 0, 3, 'map', 'player-target');
+        target.setOrigin(.5, 1);
 
-        const a = this.scene.anims.create({
-            key: 'playerAnim',
-            frames: 'player',
-            frameRate: 3,
+        this.add(target);
+
+        const bubble = new Phaser.GameObjects.Sprite(scene, 0, -7, 'map', 'player-bubble');
+        bubble.setOrigin(.5, 1);
+
+        this.add(bubble);
+
+        this.scene.add.tween({
+            targets: bubble,
+            duration: 500,
+            yoyo: true,
             repeat: -1,
-            showOnStart: true
-        });
-
-        console.log(a)
-
-        this.add(sprite);
-
-        sprite.play('playerAnim');
+            y: -5
+        })
 
     }
     movePlayerTo(x: number, y: number) {
