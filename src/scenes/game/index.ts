@@ -135,7 +135,25 @@ export default class GameScene extends Phaser.Scene {
     }
 
     private updateGameState() {
-        while (this.gameState.clients.length < 3) {
+
+        if (this.gameState.player.passangers.slot1 || this.gameState.player.passangers.slot2) {
+            const goal = this.gameState.goals.find(g => g.x === this.gameState.player.x && g.y === this.gameState.player.y);
+
+            if (goal) {
+                if (this.gameState.player.passangers.slot1) {
+                    this.gameState.player.passangers.slot1 = false
+                } else {
+                    this.gameState.player.passangers.slot2 = false
+                }
+
+                this.gameState.goals = this.gameState.goals.filter(g => g.x !== this.gameState.player.x || g.y !== this.gameState.player.y);
+                this.changeMoney(RULES.EARNINGS);
+            }
+
+        }
+
+
+        while (this.gameState.clients.length < 5) {
             const c = {
                 x: Math.floor(Math.random() * GAME_CONFIG.MAP_WIDTH),
                 y: Math.floor(Math.random() * GAME_CONFIG.MAP_HEIGHT),
@@ -157,7 +175,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.map.updateClients(this.gameState.clients);
 
-        while (this.gameState.goals.length < 3) {
+        while (this.gameState.goals.length < 5) {
             const g: Goal = {
                 id: 'id',
                 x: Math.floor(Math.random() * GAME_CONFIG.MAP_WIDTH),
