@@ -78,12 +78,10 @@ export default class GameMap extends Phaser.GameObjects.Container {
 
     public updateClients(clients: Client[]) {
         this.clients.forEach(c => {
-            console.log('DESTROY!')
             c.destroy()});
         this.clients = [];
 
         clients.forEach((data) => {
-            console.log('create Client', data);
             const c = new ClientGO(this.scene);
 
             c.setPosition(50 + data.x * GAME_CONFIG.INTERSECTION_DISTANCE, 50 + data.y * GAME_CONFIG.INTERSECTION_DISTANCE)

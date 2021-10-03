@@ -42,14 +42,12 @@ export default class ProgramList extends Phaser.GameObjects.Container {
         let panelDragged: [number, number] | null = null;
 
         this.scrollPanel.on('pointerdown', (pointer, dragX, dragY) => {
-            console.log('dragStart');
             panelDragged = [dragX, dragY];
         })
 
         this.scrollPanel.on('pointermove', (pointer, dragX, dragY) => {
             if (panelDragged) {
                 const dy = panelDragged[1] - dragY;
-                console.log({ pointer, dragX, dragY }, dy)
                 this.scrollList(dy, false);
                 panelDragged = [dragX, dragY];
             }
@@ -71,7 +69,6 @@ export default class ProgramList extends Phaser.GameObjects.Container {
         let scrollDragged: [number, number] | null = null;
 
         this.scrollBar.on('pointerdown', (pointer) => {
-            console.log('dragStart');
             scrollDragged = [pointer.x, pointer.y];
         })
 
@@ -121,9 +118,7 @@ export default class ProgramList extends Phaser.GameObjects.Container {
     }
 
     private scrollByBar(dy: number) {
-        console.log({ dy }, this.scrollBar.y)
         const newY = Math.min(SCROLL_HEIGHT - 47, Math.max(0, this.scrollBar.y - dy));
-        console.log({ newY })
         const newYProcentage = newY / (SCROLL_HEIGHT - 47);
 
         this.listContainer.setY(newYProcentage * (SCROLL_HEIGHT - this.steps.length * 51))

@@ -28,6 +28,9 @@ export default class MainScene extends Phaser.Scene {
 
     create() {
 
+        const bg = this.add.image(0,0,'intro');
+        bg.setOrigin(0,0);
+
         const box = new Phaser.GameObjects.Graphics(this);
         box.fillStyle(0x0d0d0d);
         box.fillRect(100, 100, 980, 520);

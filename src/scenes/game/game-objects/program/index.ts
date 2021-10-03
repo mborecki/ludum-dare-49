@@ -46,7 +46,6 @@ export default class GameProgram extends Phaser.GameObjects.Container {
         this.installMenu.setPosition(0, 400);
 
         this.installMenu.on('buy', (dir: DIRECTION) => {
-            console.log('BUY: ', dir);
 
             this.emit('buy', dir);
         })

@@ -127,8 +127,6 @@ export default class MapBlocks extends Phaser.GameObjects.Container {
                 normGridHeight * GRID_SIZE
             );
 
-            console.log('GRID', normGridWidth, normGridHeight)
-
             normGrid.forEach((value, index) => {
                 if (!value) {
 
@@ -144,20 +142,12 @@ export default class MapBlocks extends Phaser.GameObjects.Container {
                         if (x + element.width > normGridWidth || y + element.height > normGridHeight) {
                             fitted = false;
                         } else {
-
-                            if (element.frame === 'building-1') {
-                                console.log('building-1', (index % normGridWidth), Math.floor(index / normGridWidth))
-                                console.log('#1', element),
-                                    console.log('#2', { x, y })
-                                console.log('#2', x + element.width, y + element.height)
-                            }
                         }
 
                         if (fitted) {
                             for (let i = 0; i < element.width; i++) {
                                 for (let j = 0; j < element.height; j++) {
                                     if (fitted && normGrid[index + i + j * normGridWidth]) {
-                                        // console.log('NOT FITTED!',element, index + i + j * normGridWidth);
                                         fitted = false;
                                     }
                                 }
@@ -169,7 +159,6 @@ export default class MapBlocks extends Phaser.GameObjects.Container {
 
                             for (let i = 0; i < element.width; i++) {
                                 for (let j = 0; j < element.height; j++) {
-                                    console.log(i, j, normGrid[index + i + j * normGridWidth]);
                                     normGrid[index + i + j * normGridWidth] = true;
                                 }
                             }

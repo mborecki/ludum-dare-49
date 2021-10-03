@@ -168,8 +168,6 @@ export default class GameScene extends Phaser.Scene {
                 return x.x === c.x && x.y === c.y
             })
 
-            console.log(old);
-
             if (!old) {
                 this.gameState.clients.push(c);
             }
@@ -190,8 +188,6 @@ export default class GameScene extends Phaser.Scene {
             }) || this.gameState.goals.find(x => {
                 return x.x === g.x && x.y === g.y
             })
-
-            console.log(old);
 
             if (!old) {
                 this.gameState.goals.push(g);

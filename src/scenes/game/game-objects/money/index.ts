@@ -29,7 +29,6 @@ export default class GameMoney extends Phaser.GameObjects.Container {
     }
 
     spawnInfo(value: number) {
-        console.log('spawnInfo', value);
         const text = new Phaser.GameObjects.Text(this.scene, 111, 25, `${value < 0 ? '-' : ''}$${Math.abs(value)}`, {
             color: value > 0 ? 'green' : 'red',
             fontSize: '24px',
