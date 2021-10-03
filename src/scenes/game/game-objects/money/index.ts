@@ -15,7 +15,9 @@ export default class GameMoney extends Phaser.GameObjects.Container {
 
         this.add(frame);
 
-        this.text = new Phaser.GameObjects.Text(scene, 111, 25, 'Money: ???', {});
+        this.text = new Phaser.GameObjects.Text(scene, 111, 25, 'Money: ???', {
+            fontSize: '20px'
+        });
         this.text.setOrigin(.5);
 
         this.add(this.text);
@@ -25,7 +27,7 @@ export default class GameMoney extends Phaser.GameObjects.Container {
     }
 
     public setValue(v: number) {
-        this.text.setText(`Money: ${v}`);
+        this.text.setText(`Money: $${v}`);
     }
 
     spawnInfo(value: number) {

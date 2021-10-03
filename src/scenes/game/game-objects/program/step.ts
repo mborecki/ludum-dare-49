@@ -3,6 +3,7 @@ import { DIRECTION, Procedure, PROCEDURE_TYPE } from "../../types";
 export default class ProgramStep extends Phaser.GameObjects.Container {
 
     private text: Phaser.GameObjects.Text;
+    private text2: Phaser.GameObjects.Text;
 
     private playSprite: Phaser.GameObjects.Sprite;
     private icon: Phaser.GameObjects.Sprite;
@@ -10,7 +11,10 @@ export default class ProgramStep extends Phaser.GameObjects.Container {
     constructor(scene: Phaser.Scene) {
         super(scene, 0, 0);
 
-        this.text = new Phaser.GameObjects.Text(scene, 100, 20, '', {});
+        this.text = new Phaser.GameObjects.Text(scene, 130, 25, '', {
+            color: '#8fd96c',
+            fontSize: '20px'
+        });
         this.text.setOrigin(.5);
 
         const frame = new Phaser.GameObjects.Sprite(scene, 0, 0, 'panel', 'frame');
@@ -51,6 +55,7 @@ export default class ProgramStep extends Phaser.GameObjects.Container {
 
             case PROCEDURE_TYPE.RESTART_PROGRAM:
                 this.text.setText('Restart');
+                this.icon.setVisible(false);
         }
     }
 

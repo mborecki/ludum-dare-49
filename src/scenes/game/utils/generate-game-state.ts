@@ -1,4 +1,5 @@
 import GAME_CONFIG from "../config";
+import RULES from "../rules";
 import { DIRECTION, GameState, PROCEDURE_TYPE } from "../types";
 import generateIntersections from "./generate-intersections";
 
@@ -15,7 +16,7 @@ export default function generateGameState(): GameState {
         },
         clients: [],
         goals: [],
-        money: 100,
+        money: RULES.START_MONEY,
         program: {
             procedures: [
                 {
