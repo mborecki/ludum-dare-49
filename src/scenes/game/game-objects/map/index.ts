@@ -18,12 +18,12 @@ export default class GameMap extends Phaser.GameObjects.Container {
     constructor(scene: Phaser.Scene) {
         super(scene, 0, 0);
 
-        const bg = new Phaser.GameObjects.Sprite(scene, 0,0,'map','background');
-        bg.setOrigin(0,0);
+        const bg = new Phaser.GameObjects.Sprite(scene, 0, 0, 'map', 'background');
+        bg.setOrigin(0, 0);
         this.add(bg);
 
         this.roads = new Roads(scene);
-        this.roads.setPosition(0,0);
+        this.roads.setPosition(0, 0);
         this.add(this.roads);
 
         this.blocks = new MapBlocks(scene);
@@ -37,14 +37,14 @@ export default class GameMap extends Phaser.GameObjects.Container {
         this.gameState = gameState;
         const mapDebug = new MapDebug(this.scene);
         mapDebug.drawMap(gameState.intersections);
-        mapDebug.setPosition(50,50);
+        mapDebug.setPosition(50, 50);
         // this.add(mapDebug);
 
         this.roads.createRoads(gameState.intersections);
 
         this.blocks.createBlocks(gameState.intersections, GAME_CONFIG.MAP_WIDTH, GAME_CONFIG.MAP_HEIGHT);
 
-        this.player.setPosition(gameState.player.x * GAME_CONFIG.INTERSECTION_DISTANCE, gameState.player.y * GAME_CONFIG.INTERSECTION_DISTANCE);
+        this.player.setPosition(50 + gameState.player.x * GAME_CONFIG.INTERSECTION_DISTANCE, 50 + gameState.player.y * GAME_CONFIG.INTERSECTION_DISTANCE);
     }
 
     public movePlayer(dir: DIRECTION) {

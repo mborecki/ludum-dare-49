@@ -13,11 +13,17 @@ export default class ProgramList extends Phaser.GameObjects.Container {
     constructor(scene: Phaser.Scene) {
         super(scene, 0, 0);
 
+        const bg = new Phaser.GameObjects.Graphics(scene);
+
+        bg.fillStyle(0x0d0d0d);
+        bg.fillRect(0, 0, 242, SCROLL_HEIGHT);
+        this.add(bg);
+
         this.listContainer = new Phaser.GameObjects.Container(scene);
 
         const mask = new Phaser.GameObjects.Graphics(scene);
         mask.fillStyle(0xff0000);
-        mask.fillRect(1028, 110, 242, SCROLL_HEIGHT);
+        mask.fillRect(1028, 70, 242, SCROLL_HEIGHT);
         this.scrollPanel = new Phaser.GameObjects.Container(scene);
         this.scrollPanel.add(mask);
 
@@ -115,12 +121,12 @@ export default class ProgramList extends Phaser.GameObjects.Container {
     }
 
     private scrollByBar(dy: number) {
-        console.log({dy}, this.scrollBar.y)
+        console.log({ dy }, this.scrollBar.y)
         const newY = Math.min(SCROLL_HEIGHT - 47, Math.max(0, this.scrollBar.y - dy));
-        console.log({newY})
+        console.log({ newY })
         const newYProcentage = newY / (SCROLL_HEIGHT - 47);
 
-        this.listContainer.setY(newYProcentage *(SCROLL_HEIGHT - this.steps.length * 51))
+        this.listContainer.setY(newYProcentage * (SCROLL_HEIGHT - this.steps.length * 51))
         this.scrollBar.setY(newY)
     }
 
@@ -138,19 +144,43 @@ export default class ProgramList extends Phaser.GameObjects.Container {
         this.setPointer(gameState.program.activeStep);
     }
 
-    public setPointer(index: number) {
+    private pointerIndex = 0;
+
+    public setPointer(index: number = this.pointerIndex) {
+        this.pointerIndex = index;
         this.steps.forEach((s, i) => {
             s.markActive(i === index)
         });
+
+        this.focusPointer(this.pointerIndex);
     }
 
-    public deleteStep(index: number) {
-        const step = this.steps[index];
+    public focusPointer(index: number) {
+        const newY = Math.max(SCROLL_HEIGHT - this.steps.length * 51 ,Math.min(0, -(index + .5) * 51 + SCROLL_HEIGHT/2));
+        const newYProcentage = newY / (SCROLL_HEIGHT - this.steps.length * 51);
 
-        this.steps.splice(index, 1);
+
+        this.scene.add.tween({
+            targets: this.listContainer,
+            duration: 100,
+            y: newY
+        });
+
+        this.scene.add.tween({
+            targets: this.scrollBar,
+            duration: 100,
+            y: newYProcentage * (SCROLL_HEIGHT - 47)
+        });
+    }
+
+    public deleteStep(value: number) {
+        const step = this.steps[value];
+
+        this.steps.splice(value, 1);
         step.destroy();
         this.steps.forEach((s, index) => {
-            s.setPosition(index * 51);
+            s.setPosition(0, index * 51);
         });
+        this.setPointer();
     }
 }

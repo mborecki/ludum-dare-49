@@ -42,6 +42,10 @@ export default class GameScene extends Phaser.Scene {
         this.program = new GameProgram(this);
         this.program.loadGameState(this.gameState);
 
+        this.program.on('execute-clicked', () => {
+            this.nextStep();
+        });
+
         this.program.setPosition(10, 10);
 
         panel.add(this.program);
