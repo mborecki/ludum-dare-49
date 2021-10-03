@@ -5,6 +5,7 @@ import GameOver from "./game-objects/game-over";
 import GameMap from "./game-objects/map";
 import PlayerGO from "./game-objects/map/player";
 import GameMoney from "./game-objects/money";
+import GamePoints from "./game-objects/points";
 import GameProgram from "./game-objects/program";
 import SidePanel from "./game-objects/side-panel";
 import RULES from "./rules";
@@ -21,6 +22,7 @@ export default class GameScene extends Phaser.Scene {
     private program: GameProgram;
 
     private money: GameMoney;
+    private points: GamePoints;
 
     private carPanel: CarPanel;
 
@@ -77,6 +79,12 @@ export default class GameScene extends Phaser.Scene {
         this.money.setPosition(796, 670);
         this.add.existing(this.money);
         this.money.setValue(this.gameState.money);
+
+        this.points = new GamePoints(this);
+
+        this.points.setPosition(0, 670);
+        this.add.existing(this.points);
+        this.money.setValue(0);
 
         this.carPanel = new CarPanel(this);
         this.carPanel.setPosition(10, 560);
@@ -158,6 +166,7 @@ export default class GameScene extends Phaser.Scene {
 
                 this.gameState.goals = this.gameState.goals.filter(g => g.x !== this.gameState.player.x || g.y !== this.gameState.player.y);
                 this.changeMoney(RULES.EARNINGS);
+                this.points.addPoint();
             }
 
         }
