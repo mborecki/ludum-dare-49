@@ -33,9 +33,15 @@ export default class GameProgram extends Phaser.GameObjects.Container {
 
         // this.add(this.addButton);
 
-        const installHeader = new Phaser.GameObjects.Sprite(scene, 0, 370, 'panel', 'install');
-        installHeader.setOrigin(0);
-        this.add(installHeader);
+        // const installHeader = new Phaser.GameObjects.Sprite(scene, 0, 370, 'panel', 'install');
+        // installHeader.setOrigin(0);
+        // this.add(installHeader);
+
+        const installText = new Phaser.GameObjects.Text(this.scene, 0, 370, 'Install new:', {
+            color: '#8fd96c',
+            fontSize: '20px'
+        });
+        this.add(installText);
 
         this.stepList = new ProgramList(scene);
         this.stepList.setPosition(0, 60);
