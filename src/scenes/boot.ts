@@ -10,6 +10,7 @@ export default class BootState extends Phaser.Scene {
         this.load.atlas('tiles', 'assets/generated/tiles.png', 'assets/generated/tiles.json');
         this.load.atlas('roads', 'assets/generated/roads.png', 'assets/generated/roads.json');
         this.load.atlas('map', 'assets/generated/map.png', 'assets/generated/map.json');
+        this.load.atlas('player', 'assets/generated/player.png', 'assets/generated/player.json');
         this.load.atlas('panel', 'assets/generated/panel.png', 'assets/generated/panel.json');
 
         this.load.atlas('blocks', 'assets/generated/blocks.png', 'assets/generated/blocks.json');
