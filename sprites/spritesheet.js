@@ -82,6 +82,16 @@ const spritesheets = [
             { name: 'scroll', path: './sprites/icons/scroll.png' },
             { name: 'install', path: './sprites/icons/install.png' }
         ]
+    },
+    {
+        outputPath: './assets/generated/',
+        filename: 'car',
+        sprites: [
+            { name: 'background', path: './sprites/car/background.png' },
+            { name: 'cancel', path: './sprites/car/cancel.png' },
+            { name: 'pick-up', path: './sprites/car/pick-up.png' },
+            { name: 'person', path: './sprites/car/person.png' },
+        ]
     }
 ];
 

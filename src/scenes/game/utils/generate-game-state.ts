@@ -8,7 +8,10 @@ export default function generateGameState(): GameState {
         player: {
             x: Math.floor(GAME_CONFIG.MAP_WIDTH/2),
             y: Math.floor(GAME_CONFIG.MAP_HEIGHT/2),
-            passanger: []
+            passangers: {
+                slot1: false,
+                slot2: false,
+            }
         },
         clients: [],
         goals: [],

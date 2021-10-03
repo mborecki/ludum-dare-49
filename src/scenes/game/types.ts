@@ -29,7 +29,12 @@ export type Intersection = {
 export type Player = {
     x: number,
     y: number,
-    passanger: Passanger[]
+    passangers: Passangers
+}
+
+export type Passangers = {
+    slot1: boolean,
+    slot2: boolean
 }
 
 export type Passanger = {

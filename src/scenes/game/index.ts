@@ -1,5 +1,6 @@
 import getAudioPlayer from "../audio";
 import GAME_CONFIG from "./config";
+import CarPanel from "./game-objects/car";
 import GameMap from "./game-objects/map";
 import PlayerGO from "./game-objects/map/player";
 import GameMoney from "./game-objects/money";
@@ -19,6 +20,8 @@ export default class GameScene extends Phaser.Scene {
     private program: GameProgram;
 
     private money: GameMoney;
+
+    private carPanel: CarPanel;
 
     constructor() {
         super(null);
@@ -72,9 +75,14 @@ export default class GameScene extends Phaser.Scene {
         this.add.existing(this.money);
         this.money.setValue(this.gameState.money);
 
-        window['nextStep'] = () => {
-            this.nextStep();
-        }
+        this.carPanel = new CarPanel(this);
+        this.carPanel.setPosition(10, 560);
+
+        this.carPanel.on('pick-up', (slot: number) => {
+            this.pickUp(slot);
+        })
+
+        panel.add(this.carPanel);
 
         this.updateGameState();
     }
@@ -97,6 +105,8 @@ export default class GameScene extends Phaser.Scene {
                 this.setActiveStep(0);
                 break;
         }
+
+        this.updateGameState();
     }
 
     private setActiveStep(index: number) {
@@ -169,5 +179,21 @@ export default class GameScene extends Phaser.Scene {
         }
 
         this.map.updateGoals(this.gameState.goals);
+        this.carPanel.updateCar(this.gameState);
+    }
+
+    private pickUp(slot: number) {
+        switch (slot) {
+            case 1:
+                this.gameState.player.passangers.slot1 = true;
+                break;
+            case 2:
+                this.gameState.player.passangers.slot2 = true;
+                break;
+        }
+
+        this.gameState.clients = this.gameState.clients.filter(c => c.x !== this.gameState.player.x || c.y !== this.gameState.player.y);
+
+        this.updateGameState();
     }
 }
