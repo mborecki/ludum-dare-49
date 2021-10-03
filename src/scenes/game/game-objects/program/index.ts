@@ -1,5 +1,6 @@
-import { GameState } from "../../types";
+import { DIRECTION, GameState, Procedure } from "../../types";
 import AddButton from "./add";
+import InstallMenu from "./add-menu";
 import ExecuteButton from "./execute";
 import ProgramList from "./list";
 import ProgramStep from "./step";
@@ -11,7 +12,7 @@ export default class GameProgram extends Phaser.GameObjects.Container {
     private executeButton: ExecuteButton;
     private addButton: AddButton;
 
-    private bg: Phaser.GameObjects.Graphics;
+    private installMenu: InstallMenu;
 
     private stepList: ProgramList;
 
@@ -27,15 +28,30 @@ export default class GameProgram extends Phaser.GameObjects.Container {
 
         this.add(this.executeButton);
 
-        this.addButton = new AddButton(scene);
-        this.addButton.setPosition(0,370);
+        // this.addButton = new AddButton(scene);
+        // this.addButton.setPosition(0,370);
 
-        this.add(this.addButton);
+        // this.add(this.addButton);
+
+        const installHeader = new Phaser.GameObjects.Sprite(scene, 0, 370, 'panel', 'install');
+        installHeader.setOrigin(0);
+        this.add(installHeader);
 
         this.stepList = new ProgramList(scene);
         this.stepList.setPosition(0, 60);
 
         this.add(this.stepList);
+
+        this.installMenu = new InstallMenu(scene);
+        this.installMenu.setPosition(0, 400);
+
+        this.installMenu.on('buy', (dir: DIRECTION) => {
+            console.log('BUY: ', dir);
+
+            this.emit('buy', dir);
+        })
+
+        this.add(this.installMenu);
 
     }
 
@@ -50,4 +66,10 @@ export default class GameProgram extends Phaser.GameObjects.Container {
     public deleteStep(index: number) {
         this.stepList.deleteStep(index);
     }
+
+    public addStep(step: Procedure, index: number) {
+        this.stepList.addStep(step, index);
+    }
+
+    public add
 }

@@ -1,4 +1,4 @@
-import { GameState } from "../../types";
+import { GameState, Procedure } from "../../types";
 import ProgramStep from "./step";
 
 const SCROLL_HEIGHT = 300;
@@ -182,5 +182,29 @@ export default class ProgramList extends Phaser.GameObjects.Container {
             s.setPosition(0, index * 51);
         });
         this.setPointer();
+    }
+    public addStep(step: Procedure, index: number) {
+        const newElement = new ProgramStep(this.scene);
+
+        newElement.setProcedureData(step);
+
+        this.listContainer.add(newElement);
+        newElement.setPosition(200, index * (51));
+
+        const moving = this.steps.filter((_, i) => i>=index);
+
+        this.steps.splice(index, 0, newElement);
+
+        this.steps.forEach((step, index) => {
+            this.scene.add.tween({
+                targets: step,
+                duration: 300,
+                y: index*51,
+                x: 0,
+            })
+        })
+
+        this.setPointer();
+
     }
 }

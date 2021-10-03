@@ -14,8 +14,8 @@ export default class ExecuteButton extends Phaser.GameObjects.Container {
             useHandCursor: true
         });
 
-        const frame = new Phaser.GameObjects.Sprite(scene, 131, 25, 'panel', 'frame');
-        const sprite = new Phaser.GameObjects.Sprite(scene, 131, 25, 'panel', 'play');
+        const frame = new Phaser.GameObjects.Sprite(scene, 121, 25, 'panel', 'frame-big');
+        const sprite = new Phaser.GameObjects.Sprite(scene, 121, 25, 'panel', 'play');
 
         this.add(frame);
         this.add(sprite);

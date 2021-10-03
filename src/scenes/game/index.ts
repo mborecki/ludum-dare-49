@@ -5,7 +5,7 @@ import GameMoney from "./game-objects/money";
 import GameProgram from "./game-objects/program";
 import SidePanel from "./game-objects/side-panel";
 import RULES from "./rules";
-import { Procedure, PROCEDURE_TYPE } from "./types";
+import { DIRECTION, Procedure, PROCEDURE_TYPE } from "./types";
 import generateGameState from "./utils/generate-game-state";
 
 export default class GameScene extends Phaser.Scene {
@@ -47,6 +47,21 @@ export default class GameScene extends Phaser.Scene {
         });
 
         this.program.setPosition(10, 10);
+
+        this.program.on('buy', (dir: DIRECTION) => {
+            if (this.gameState.money >= RULES.ADD_COST) {
+                this.gameState.money -= RULES.ADD_COST;
+                this.money.setValue(this.gameState.money);
+
+                const newStep = {
+                    type: PROCEDURE_TYPE.DIRECTION,
+                    direction: dir
+                }
+
+                this.gameState.program.procedures.splice(this.gameState.program.activeStep, 0, newStep);
+                this.program.addStep(newStep, this.gameState.program.activeStep);
+            }
+        });
 
         panel.add(this.program);
 

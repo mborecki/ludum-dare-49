@@ -14,8 +14,8 @@ export default class AddButton extends Phaser.GameObjects.Container {
             useHandCursor: true
         });
 
-        const frame = new Phaser.GameObjects.Sprite(scene, 131, 25, 'panel', 'frame');
-        const sprite = new Phaser.GameObjects.Sprite(scene, 131, 25, 'panel', 'add');
+        const frame = new Phaser.GameObjects.Sprite(scene, 121, 25, 'panel', 'frame-big');
+        const sprite = new Phaser.GameObjects.Sprite(scene, 121, 25, 'panel', 'add');
 
         this.add(frame);
         this.add(sprite);

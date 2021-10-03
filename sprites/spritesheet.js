@@ -60,12 +60,15 @@ const spritesheets = [
             {name: 'arrow-right', path: './sprites/icons/arrow-right.png'},
             {name: 'arrow-left', path: './sprites/icons/arrow-left.png'},
             {name: 'frame', path: './sprites/icons/frame.png'},
+            {name: 'frame-big', path: './sprites/icons/frame-big.png'},
+            {name: 'frame-small', path: './sprites/icons/frame-small.png'},
             {name: 'play-active', path: './sprites/icons/play-active.png'},
             {name: 'play', path: './sprites/icons/play.png'},
             {name: 'scroll-body', path: './sprites/icons/scroll-body.png'},
             {name: 'scroll-down', path: './sprites/icons/scroll-down.png'},
             {name: 'scroll-up', path: './sprites/icons/scroll-up.png'},
-            {name: 'scroll', path: './sprites/icons/scroll.png'}
+            {name: 'scroll', path: './sprites/icons/scroll.png'},
+            {name: 'install', path: './sprites/icons/install.png'}
         ]
     }
 ];
