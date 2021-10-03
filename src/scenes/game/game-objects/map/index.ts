@@ -1,8 +1,10 @@
 import GAME_CONFIG from "../../config";
-import { DIRECTION, GameState } from "../../types";
+import { Client, DIRECTION, GameState, Goal } from "../../types";
 import { getSibling } from "../../utils/generate-intersections";
 import MapBlocks from "./blocks";
+import ClientGO from "./client";
 import MapDebug from "./debug";
+import GoalGO from "./goal";
 import PlayerGO from "./player";
 import Roads from "./roads";
 
@@ -70,5 +72,31 @@ export default class GameMap extends Phaser.GameObjects.Container {
         }
 
         throw 'Something gone wrong';
+    }
+
+    private clients: ClientGO[] = []
+
+    public updateClients(clients: Client[]) {
+        this.clients.forEach(c => c.destroy());
+
+        clients.forEach((data) => {
+            const c = new ClientGO(this.scene);
+
+            c.setPosition(50 + data.x * GAME_CONFIG.INTERSECTION_DISTANCE, 50 + data.y * GAME_CONFIG.INTERSECTION_DISTANCE)
+            this.add(c);
+        })
+    }
+
+    private goals: GoalGO[] = []
+
+    public updateGoals(goals: Goal[]) {
+        this.goals.forEach(c => c.destroy());
+
+        goals.forEach((data) => {
+            const c = new GoalGO(this.scene);
+
+            c.setPosition(50 + data.x * GAME_CONFIG.INTERSECTION_DISTANCE, 50 + data.y * GAME_CONFIG.INTERSECTION_DISTANCE)
+            this.add(c);
+        })
     }
 }

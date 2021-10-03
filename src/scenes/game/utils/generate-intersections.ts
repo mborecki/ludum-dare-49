@@ -1,7 +1,7 @@
 import GAME_CONFIG from "../config";
 import { DIRECTION, Intersection } from "../types";
 
-const ROAD_CHANCE = .5
+const ROAD_CHANCE = .75
 
 export default function generateIntersections(width: number, height: number): Intersection[] {
 

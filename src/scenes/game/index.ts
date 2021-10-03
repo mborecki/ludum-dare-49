@@ -1,11 +1,12 @@
 import getAudioPlayer from "../audio";
+import GAME_CONFIG from "./config";
 import GameMap from "./game-objects/map";
 import PlayerGO from "./game-objects/map/player";
 import GameMoney from "./game-objects/money";
 import GameProgram from "./game-objects/program";
 import SidePanel from "./game-objects/side-panel";
 import RULES from "./rules";
-import { DIRECTION, Procedure, PROCEDURE_TYPE } from "./types";
+import { DIRECTION, Goal, Procedure, PROCEDURE_TYPE } from "./types";
 import generateGameState from "./utils/generate-game-state";
 
 export default class GameScene extends Phaser.Scene {
@@ -74,6 +75,8 @@ export default class GameScene extends Phaser.Scene {
         window['nextStep'] = () => {
             this.nextStep();
         }
+
+        this.updateGameState();
     }
 
     private nextStep() {
@@ -115,9 +118,56 @@ export default class GameScene extends Phaser.Scene {
         this.program.deleteStep(index);
         const deleted = this.gameState.program.procedures.splice(index, 1);
 
-        this.cameras.main.flash(300, 255,0,0);
+        this.cameras.main.flash(300, 255, 0, 0);
 
         this.changeMoney(RULES.ERROR_COST)
 
+    }
+
+    private updateGameState() {
+        while (this.gameState.clients.length < 3) {
+            const c = {
+                x: Math.floor(Math.random() * GAME_CONFIG.MAP_WIDTH),
+                y: Math.floor(Math.random() * GAME_CONFIG.MAP_HEIGHT),
+                goalType: 'red'
+            }
+
+            const old = this.gameState.clients.find(x => {
+                return x.x === c.x && x.y === c.y
+            }) || this.gameState.goals.find(x => {
+                return x.x === c.x && x.y === c.y
+            })
+
+            console.log(old);
+
+            if (!old) {
+                this.gameState.clients.push(c);
+            }
+        }
+
+        this.map.updateClients(this.gameState.clients);
+
+        while (this.gameState.goals.length < 3) {
+            const g: Goal = {
+                id: 'id',
+                x: Math.floor(Math.random() * GAME_CONFIG.MAP_WIDTH),
+                y: Math.floor(Math.random() * GAME_CONFIG.MAP_HEIGHT),
+                type: 'red'
+            }
+
+            const old = this.gameState.clients.find(x => {
+                return x.x === g.x && x.y === g.y
+            }) || this.gameState.goals.find(x => {
+                return x.x === g.x && x.y === g.y
+            })
+
+            console.log(old);
+
+            if (!old) {
+                this.gameState.goals.push(g);
+            }
+        }
+
+        this.map.updateGoals(this.gameState.goals);
     }
 }
