@@ -64,7 +64,8 @@ const spritesheets = [
             {name: 'play', path: './sprites/icons/play.png'},
             {name: 'scroll-body', path: './sprites/icons/scroll-body.png'},
             {name: 'scroll-down', path: './sprites/icons/scroll-down.png'},
-            {name: 'scroll-up', path: './sprites/icons/scroll-up.png'}
+            {name: 'scroll-up', path: './sprites/icons/scroll-up.png'},
+            {name: 'scroll', path: './sprites/icons/scroll.png'}
         ]
     }
 ];

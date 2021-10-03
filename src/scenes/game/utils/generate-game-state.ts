@@ -32,6 +32,38 @@ export default function generateGameState(): GameState {
                     direction: DIRECTION.W
                 },
                 {
+                    type: PROCEDURE_TYPE.DIRECTION,
+                    direction: DIRECTION.N
+                },
+                {
+                    type: PROCEDURE_TYPE.DIRECTION,
+                    direction: DIRECTION.E
+                },
+                {
+                    type: PROCEDURE_TYPE.DIRECTION,
+                    direction: DIRECTION.S
+                },
+                {
+                    type: PROCEDURE_TYPE.DIRECTION,
+                    direction: DIRECTION.W
+                },
+                {
+                    type: PROCEDURE_TYPE.DIRECTION,
+                    direction: DIRECTION.N
+                },
+                {
+                    type: PROCEDURE_TYPE.DIRECTION,
+                    direction: DIRECTION.E
+                },
+                {
+                    type: PROCEDURE_TYPE.DIRECTION,
+                    direction: DIRECTION.S
+                },
+                {
+                    type: PROCEDURE_TYPE.DIRECTION,
+                    direction: DIRECTION.W
+                },
+                {
                     type: PROCEDURE_TYPE.RESTART_PROGRAM
                 }
             ],

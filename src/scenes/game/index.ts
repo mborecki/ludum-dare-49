@@ -23,6 +23,10 @@ export default class GameScene extends Phaser.Scene {
         super(null);
     }
 
+    preload() {
+        this.load.scenePlugin('rexuiplugin', '/assets/vendors/rexuiplugin.min.js', 'rexUI', 'rexUI');
+    }
+
     create() {
         const panel = new SidePanel(this);
         panel.setPosition(1018, 0);

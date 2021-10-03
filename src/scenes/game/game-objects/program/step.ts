@@ -4,24 +4,28 @@ export default class ProgramStep extends Phaser.GameObjects.Container {
 
     private text: Phaser.GameObjects.Text;
 
+    private playSprite: Phaser.GameObjects.Sprite;
+    private icon: Phaser.GameObjects.Sprite;
+
     constructor(scene: Phaser.Scene) {
         super(scene, 0, 0);
 
         this.text = new Phaser.GameObjects.Text(scene, 100, 20, '', {});
         this.text.setOrigin(.5);
 
-        const gfx = new Phaser.GameObjects.Graphics(scene);
+        const frame = new Phaser.GameObjects.Sprite(scene, 0, 0, 'panel', 'frame');
+        frame.setOrigin(0);
 
-        gfx.lineStyle(1, 0xffffff, 1);
-        gfx.beginPath()
-        gfx.moveTo(0,0)
-        gfx.lineTo(200, 0);
-        gfx.lineTo(200, 40);
-        gfx.lineTo(0, 40);
-        gfx.lineTo(0, 0);
-        gfx.strokePath();
+        this.playSprite = new Phaser.GameObjects.Sprite(scene, 50, 25, 'panel', 'play');
+        this.playSprite.setOrigin(.5);
 
-        this.add(gfx);
+        this.icon = new Phaser.GameObjects.Sprite(scene, 125, 25, 'panel', 'arrow-up');
+        this.icon.setOrigin(.5);
+
+
+        this.add(frame);
+        this.add(this.playSprite);
+        this.add(this.icon);
         this.add(this.text);
     }
 
@@ -30,16 +34,17 @@ export default class ProgramStep extends Phaser.GameObjects.Container {
             case PROCEDURE_TYPE.DIRECTION:
                 switch (data.direction) {
                     case DIRECTION.N:
-                        this.text.setText('Drive N');
+
+                        this.icon.setTexture('panel', 'arrow-up');
                         break;
                     case DIRECTION.S:
-                        this.text.setText('Drive S');
+                        this.icon.setTexture('panel', 'arrow-down');
                         break;
                     case DIRECTION.E:
-                        this.text.setText('Drive E');
+                        this.icon.setTexture('panel', 'arrow-right');
                         break;
                     case DIRECTION.W:
-                        this.text.setText('Drive W');
+                        this.icon.setTexture('panel', 'arrow-left');
                         break;
                 }
                 break;
@@ -47,5 +52,9 @@ export default class ProgramStep extends Phaser.GameObjects.Container {
             case PROCEDURE_TYPE.RESTART_PROGRAM:
                 this.text.setText('Restart');
         }
+    }
+
+    public markActive(value: boolean) {
+        this.playSprite.setTexture('panel', value ? 'play-active' : 'play');
     }
 }
