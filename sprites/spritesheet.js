@@ -49,6 +49,23 @@ const spritesheets = [
         sprites: [
             {name: 'tree-1', path: './sprites/blocks/tree-1.png'}
         ]
+    },
+    {
+        outputPath: './assets/generated/',
+        filename: 'panel',
+        sprites: [
+            {name: 'add', path: './sprites/icons/add.png'},
+            {name: 'arrow-down', path: './sprites/icons/arrow-down.png'},
+            {name: 'arrow-up', path: './sprites/icons/arrow-up.png'},
+            {name: 'arrow-right', path: './sprites/icons/arrow-right.png'},
+            {name: 'arrow-left', path: './sprites/icons/arrow-left.png'},
+            {name: 'frame', path: './sprites/icons/frame.png'},
+            {name: 'play-active', path: './sprites/icons/play-active.png'},
+            {name: 'play', path: './sprites/icons/play.png'},
+            {name: 'scroll-body', path: './sprites/icons/scroll-body.png'},
+            {name: 'scroll-down', path: './sprites/icons/scroll-down.png'},
+            {name: 'scroll-up', path: './sprites/icons/scroll-up.png'}
+        ]
     }
 ];
 
