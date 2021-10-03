@@ -1,6 +1,7 @@
 import getAudioPlayer from "../audio";
 import GAME_CONFIG from "./config";
 import CarPanel from "./game-objects/car";
+import GameOver from "./game-objects/game-over";
 import GameMap from "./game-objects/map";
 import PlayerGO from "./game-objects/map/player";
 import GameMoney from "./game-objects/money";
@@ -22,6 +23,8 @@ export default class GameScene extends Phaser.Scene {
     private money: GameMoney;
 
     private carPanel: CarPanel;
+
+    private gameOver: GameOver;
 
     constructor() {
         super(null);
@@ -84,6 +87,10 @@ export default class GameScene extends Phaser.Scene {
 
         panel.add(this.carPanel);
 
+        this.gameOver = new GameOver(this);
+        // this.gameOver.setVisible(false);
+        this.add.existing(this.gameOver);
+
         this.updateGameState();
     }
 
@@ -121,7 +128,8 @@ export default class GameScene extends Phaser.Scene {
         this.money.spawnInfo(diff);
 
         if (this.gameState.money < 0) {
-            throw "BANKRUT!!!!";
+            console.log('GAME OVER!!!')
+            this.gameOver.setVisible(true);
         }
     }
 

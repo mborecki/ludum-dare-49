@@ -18,8 +18,8 @@ export default class App extends Phaser.Game {
             }
         });
 
-        this.scene.add('bootScene', new BootScene('mainScene'), true);
-        // this.scene.add('bootScene', new BootScene('gameScene'), true);
+        // this.scene.add('bootScene', new BootScene('mainScene'), true);
+        this.scene.add('bootScene', new BootScene('gameScene'), true);
         this.scene.add('mainScene', new MainScene());
         this.scene.add('gameScene', new GameScene());
     }
